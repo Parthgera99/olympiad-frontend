@@ -18,10 +18,16 @@ connectDB();
 const SECRET_API_PATH = process.env.SECRET_API_PATH;
 const PORT = process.env.PORT || 5000;
 
-// fetching the blue print(s)
-const indexRoute = require('./Routes/index')
-app.use("/"+SECRET_API_PATH,indexRoute)
+app.get("/"+SECRET_API_PATH,(req,res) => {
+  res.send("Hola you are on api home route")
+})
 
+// fetching the blueprint(s)
+const loginSignup = require("./Routes/loginSignup");
+app.use("/"+SECRET_API_PATH,loginSignup)
+
+
+// route for 404 status code (the route that doesn't exists)
 app.get('*', (req, res) => {
     res.status(404).json({ error: "Route not found" });
 });
